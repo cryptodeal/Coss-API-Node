@@ -66,7 +66,6 @@ const Coss = require('./index')();
         //console.log(exchangeInfo);
     
     //getMarketSummary: Returns Object res.body
-    //NOT WORKING YET, EXCHANGE IS THE ISSUE
         //const marketSummary = await Coss.getMarketSummary({Symbol: "coss-eth"})
         //console.log(marketSummary)
 
