@@ -169,9 +169,9 @@ let Coss = () => {
         //GET ORDER DETAILS
         getOrderDetails: async (params = {}) => {
             if (!params.ID) {
-                return Promise.reject("cancelOrder(), You must supply a valid order_ID to cancel, e.g. '9e5ae4dd-3369-401d-81f5-dff985e1c4e7'!");
+                return Promise.reject("getOrderDetails(), You must supply a valid order_ID to cancel, e.g. '9e5ae4dd-3369-401d-81f5-dff985e1c4e7'!");
             } else if (params.ID && typeof params.ID !== 'string') {
-                return Promise.reject("cancelOrder(), You must supply a valid order_ID to cancel as a string, e.g. '9e5ae4dd-3369-401d-81f5-dff985e1c4e7'!");
+                return Promise.reject("getOrderDetails(), You must supply a valid order_ID to cancel as a string, e.g. '9e5ae4dd-3369-401d-81f5-dff985e1c4e7'!");
             } 
 
             var now = new Date().getTime()
@@ -191,9 +191,9 @@ let Coss = () => {
             } else if (params.Limit && typeof params.Limit !== 'number') {
                 return Promise.reject("getOpenOrders(), You must supply a valid Limit as a number for your open orders, e.g. '10'!");
             } else if (!params.Symbol) {
-                return Promise.reject("cancelOrder(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+                return Promise.reject("getOpenOrders(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
             } else if (params.Symbol && typeof params.Symbol !== 'string') {
-                return Promise.reject("cancelOrder(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+                return Promise.reject("getOpenOrders(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
             } 
 
             var now = new Date().getTime()
@@ -205,6 +205,58 @@ let Coss = () => {
                 'recvWindow': 5000
             }
             let url = HOST_URL + "/order/list/open";
+            return transmit_encrypted_request(HttpMethod.POST, url, query_params) 
+        },
+
+        //GET COMPLETED ORDERS
+        getCompletedOrders: async (params = {}) => {
+            if (!params.Limit) {
+                return Promise.reject("getCompletedOrders(), You must supply a valid Limit for your open orders, e.g. '10'!");
+            } else if (params.Limit && typeof params.Limit !== 'number') {
+                return Promise.reject("getCompletedOrders(), You must supply a valid Limit as a number for your open orders, e.g. '10'!");
+            } else if (!params.Symbol) {
+                return Promise.reject("getCompletedOrders(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+            } else if (params.Symbol && typeof params.Symbol !== 'string') {
+                return Promise.reject("getCompletedOrders(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+            } 
+
+            var now = new Date().getTime()
+            var query_params = {
+                'limit': params.Limit.toString(),
+                'page': 0,
+                'symbol': params.Symbol,
+                'timestamp': now,
+                'recvWindow': 5000
+            }
+            let url = HOST_URL + "/order/list/completed";
+            return transmit_encrypted_request(HttpMethod.POST, url, query_params) 
+        },
+
+        //GET ALL USER ORDERS
+        getAllOrders: async (params = {}) => {
+            if (!params.Limit) {
+                return Promise.reject("getAllOrders(), You must supply a valid Limit for your open orders, e.g. '10'!");
+            } else if (params.Limit && typeof params.Limit !== 'number') {
+                return Promise.reject("getAllOrders(), You must supply a valid Limit as a number for your open orders, e.g. '10'!");
+            } else if (!params.Symbol) {
+                return Promise.reject("getAllOrders(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+            } else if (params.Symbol && typeof params.Symbol !== 'string') {
+                return Promise.reject("getAllOrders(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+            } else if (!params.ID) {
+                return Promise.reject("getAllOrders(), You must supply a valid account ID");
+            } else if (params.ID && typeof params.ID !== 'string') {
+                return Promise.reject("getAllOrders(), You must supply a valid account ID as a string");
+            } 
+
+            var now = new Date().getTime()
+            var query_params = {
+                'symbol': params.Symbol,
+                'from_id': params.ID,
+                'limit': params.Limit,
+                'timestamp': now,
+                'recvWindow': 5000
+            }
+            let url = HOST_URL + "/order/list/all";
             return transmit_encrypted_request(HttpMethod.POST, url, query_params) 
         },
 
@@ -227,9 +279,9 @@ let Coss = () => {
         //get Market Price
         getPairDepth: async (params = {}) => {
             if (!params.Symbol) {
-                return Promise.reject("getMarketPrice(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+                return Promise.reject("getPairDepth(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
             } else if (params.Symbol && typeof params.Symbol !== 'string') {
-                return Promise.reject("getMarketPrice(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+                return Promise.reject("getPairDepth(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
             } 
             console.log(HOST_URL + "/dp/" + '?symbol=' + params.Symbol);
             let url = HOST_URL + "/dp/" + '?symbol=' + params.Symbol;
@@ -241,9 +293,9 @@ let Coss = () => {
         //get Market Price
         getMarketSides: async (params = {}) => {
             if (!params.Symbol) {
-                return Promise.reject("getMarketPrice(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+                return Promise.reject("getMarketSides(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
             } else if (params.Symbol && typeof params.Symbol !== 'string') {
-                return Promise.reject("getMarketPrice(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+                return Promise.reject("getMarketSides(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
             } 
             console.log(HOST_URL + "/dp/" + '?symbol=' + params.Symbol);
             let url = HOST_URL + "/dp/" + '?symbol=' + params.Symbol;
@@ -251,11 +303,29 @@ let Coss = () => {
             let pairDepth = await publicRequest(url);
             let marketSides = [[pairDepth.bids[0][0], pairDepth.bids[0][1]],[pairDepth.asks[0][0], pairDepth.asks[0][1]]];
 
-            return (marketSides)
-
-
+            return(marketSides)
         },
 
+        //get Exchange Info
+        getExchangeInfo: async () => {
+            console.log(HOST_URL + "/exchange-info");
+            let url = HOST_URL + "/exchange-info";
+
+            return publicRequest(url);
+        },
+
+        //get Market Summary (NOT WORKING ATM)
+        getMarketSummary: async (params = {}) => {
+            if (!params.Symbol) {
+                return Promise.reject("getMarketSummary(), You must supply a valid trading pair Symbol, e.g. 'eth-btc'!");
+            } else if (params.Symbol && typeof params.Symbol !== 'string') {
+                return Promise.reject("getMarketSummary(), You must supply a valid trading pair Symbol as a string, e.g. 'eth-btc'!");
+            } 
+            console.log(HOST_URL + "/getmarketsummaries" + '?symbol=' + params.Symbol);
+            let url = HOST_URL + "/getmarketsummaries" + '?symbol=' + params.Symbol;
+
+            return publicRequest(url);
+        },
 
 
     }

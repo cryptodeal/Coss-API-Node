@@ -8,46 +8,67 @@ const Coss = require('./index')();
 //private functionalities: 
 
     //placeLimitOrder: Returns Object res.body
-        //const myOrder = await Coss.placeLimitOrder({Symbol: 'coss-eth', Side: 'Buy', Price: 0.00035981, Amount: 100});
-        //console.log(JSON.stringify(myOrder));
+        //const myOrder = await Coss.placeLimitOrder({Symbol: 'coss-eth', Side: 'Buy', Price: 0.00028689, Amount: 500});
+        //console.log(myOrder);
 
     //placeMarketOrder: Returns Object res.body
-        //const marketOrder = await Coss.placeMarketOrder({Symbol: 'coss-eth', Side: 'Buy', Price: 0.0000294, Amount: 50});
-        //console.log(JSON.stringify(marketOrder));
+    //NOT WORKING YET; EXCHANGE SIDE PROBLEM
+        //const marketOrder = await Coss.placeMarketOrder({Symbol: 'coss-eth', Side: 'Buy', Amount: 50});
+        //console.log(marketOrder);
 
     //cancelOrder: Returns Object res.body
         //const cancelOrder = await Coss.cancelOrder({ID: '5c9bdabc-017d-4161-b0ae-dc3ecb57466c', Symbol: 'coss-eth'});
-        //console.log(JSON.stringify(cancelOrder))
+        //console.log(cancelOrder)
 
     //getOrderDetails: Returns Object res.body
         //const OrderDetails = await Coss.getOrderDetails({ID: '58cead73-474e-4ac7-8f39-ae3875b41ff6'});
-        //console.log(JSON.stringify(OrderDetails))
+        //console.log(OrderDetails)
 
     //getOpenOrders: Returns Object res.body
+    //NOT WORKING YET; EXCHANGE RETURNS ORDERS THAT HAVE LONG BEEN CANCELLED
         //const openOrders = await Coss.getOpenOrders({Limit: 10, Symbol: "coss-eth"});
-        //console.log(JSON.stringify(openOrders))
+        //console.log(openOrders)
+
+    //getCompletedOrders: Returns Object res.body
+        //const completedOrders = await Coss.getCompletedOrders({Limit: 10, Symbol: "coss-eth"});
+        //console.log(completedOrders);
+    
+    //getAllOrders: Returns Object res.body (Limit cannot be >50)
+        //const allOrders = await Coss.getAllOrders({Symbol: "coss-eth", ID: "YOUR ACCOUNT ID", Limit: 10});
+        //console.log(allOrders);
 
     //getAccountBalances: Returns Object res.body
         //const getBalance = await Coss.getAccountBalances()
-        //console.log(JSON.stringify(getBalance))
+        //console.log(getBalance)
 
     //getAccountDetails: Returns Object res.body
         //const accountDetails = await Coss.getAccountDetails()
-        //console.log(JSON.stringify(accountDetails))
+        //console.log(accountDetails)
+    
+    
 
 //public functionalities:
 
     //getMarketPrice: Returns Object res.body
         //const marketPrice = await Coss.getMarketPrice({Symbol: "eth-btc"});
-        //console.log(JSON.stringify(marketPrice));
+        //console.log(marketPrice);
 
     //getPairDepth: Returns Object res.body
         //const pairDepth = await Coss.getPairDepth({Symbol: "coss-eth"});
-        //console.log(JSON.stringify(pairDepth))
+        //console.log(pairDepth)
 
     //getMarketSides: Returns a Nested array of data in this order: [[firstBidPrice, firstBidQuantity][firstAskPrice, firstAskQuantity]]
-         const marketSides = await Coss.getMarketSides({Symbol: "coss-eth"});
-         console.log(JSON.stringify(marketSides))
+        //const marketSides = await Coss.getMarketSides({Symbol: "coss-eth"});
+        //console.log(marketSides)
+
+    //getExchangeInfo: Returns Object res.body
+        //const exchangeInfo = await Coss.getExchangeInfo();
+        //console.log(exchangeInfo);
+    
+    //getMarketSummary: Returns Object res.body
+    //NOT WORKING YET, EXCHANGE IS THE ISSUE
+        //const marketSummary = await Coss.getMarketSummary({Symbol: "coss-eth"})
+        //console.log(marketSummary)
 
 
     } catch (err) {
