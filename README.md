@@ -1,2 +1,5 @@
 # Coss-API-Node
-A modular wrapper for the coss.io API written in node.js. Wrapper has been constructed to be modular so that it can be easily developed around and potentially released as a node module that can be required as a dependency for easy development around. For any inquiries about use, please contact James Deal, the developer: @ jimmydeal@gmail.com or on telegram @cryptodeal20 
+
+A modular, open source/free use wrapper written in node.js for the coss.io API. All functionalities have been tested and work. API keys set as vars w/i index.js (for the time being). Bot.js serves as an example of how to call all of the wrapper's functions; every API call function returns the res.body response from the server as an object when the function is called (excluding getMarketSides() which returns a nested array formatted as such: [[firstBidPrice, firstBidQuantity][firstAskPrice, firstAskQuantity]].
+
+For any inquiries about use, please contact James Deal, the developer: @ jimmydeal@gmail.com or on telegram @cryptodeal20 
