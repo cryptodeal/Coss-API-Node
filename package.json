@@ -17,6 +17,7 @@
     "API",
     "bot"
   ],
+  "license": "MIT",
   "author": "cryptodeal",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
