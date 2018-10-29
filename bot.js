@@ -12,9 +12,9 @@ const Coss = require('./index')();
         console.log(myOrder);
 
     //placeMarketOrder: Returns Object res.body
-    //NOT WORKING YET; EXCHANGE REBOOT NEEDED, SHOULD BE 'WORKING' UPON API RELEASE (CODE IS 'CORRECT' AS PER TALKS W DEVS, BUT CANNOT TEST UNTIL API RELEASE)
-        const marketOrder = await Coss.placeMarketOrder({Symbol: 'coss-eth', Side: 'Buy', Amount: 50});
-        console.log(marketOrder);
+    //DELAYED (COSS SIDE ISSUE, FOR NOW YOU ARE BEST OFF BY: getMarketSides, and placeLimitOrder at the price returned for bid/ask)
+        //const marketOrder = await Coss.placeMarketOrder({Symbol: 'coss-eth', Side: 'Buy', Amount: 50});
+        //console.log(marketOrder);
 
     //cancelOrder: Returns Object res.body
         const cancelOrder = await Coss.cancelOrder({ID: '5c9bdabc-017d-4161-b0ae-dc3ecb57466c', Symbol: 'coss-eth'});
